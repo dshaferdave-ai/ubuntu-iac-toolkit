@@ -1,0 +1,26 @@
+---
+- name: Hardening Pipeline for Ubuntu Enterprise Server
+  hosts: my_servers
+  become: true # This tells Ansible to run these commands as the Supreme Admin (root)
+
+  tasks:
+    - name: 1. Update the operating system package registry
+      apt:
+        update_cache: yes
+
+    - name: 2. Install the Uncomplicated Firewall (UFW)
+      apt:
+        name: ufw
+        state: present
+
+    - name: 3. Block all incoming internet traffic by default
+      ufw:
+        state: enabled
+        policy: deny
+        direction: incoming
+
+    - name: 4. Explicitly allow SSH connections (Door 22) so we don't lock ourselves out
+      ufw:
+        rule: allow
+        port: "22"
+        proto: tcp

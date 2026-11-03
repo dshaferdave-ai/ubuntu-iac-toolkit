@@ -1,0 +1,5 @@
+.vagrant/
+vagrant_key
+*.retry
+*.log
+.DS_Store

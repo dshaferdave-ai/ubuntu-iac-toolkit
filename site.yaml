@@ -1,0 +1,6 @@
+---
+- name: Provision and Harden Ubuntu Infrastructure
+  hosts: all
+  become: yes
+  roles:
+    - hardening
